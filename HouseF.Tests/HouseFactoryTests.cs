@@ -60,7 +60,7 @@ namespace HouseF.Tests
             Assert.That(calculatedResult.HasGarage, Is.EqualTo(false));
             Assert.That(calculatedResult.NoOfRooms, Is.EqualTo(3));
             Assert.That(calculatedResult.NoOfBathrooms, Is.EqualTo(1));
-            Assert.That(calculatedResult.NoOfRooms, Is.EqualTo(7));
+            Assert.That(calculatedResult.NoOfWindows, Is.EqualTo(7));
         }
 
         [Test]
