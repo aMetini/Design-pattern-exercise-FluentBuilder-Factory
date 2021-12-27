@@ -100,12 +100,5 @@ namespace HouseFB.Tests
                 .With.Message.EqualTo("Cannot create a house with zero or a negative number of rooms, windows, or parking spots!"));
         }
 
-        //[TestCase(0)]
-        //public void NoOfParkingSpots_IsZero_Get_ReturnArgException(int noOfParkingSpots)
-        //{
-        //    Assert.That(() => new HouseBuilder().AddNoOfRooms(noOfParkingSpots).Build(),
-        //        Throws.TypeOf<ArgumentException>()
-        //        .With.Message.EqualTo("Cannot create a house with zero or a negative number of rooms, windows, or parking spots!"));
-        //}
     }
 }
