@@ -35,6 +35,10 @@ namespace HouseF.Tests
             Assert.That(calculatedResult.HasMountainView, Is.EqualTo(true));
             Assert.That(calculatedResult.HasOceanView, Is.EqualTo(true));
             Assert.That(calculatedResult.HasGarage, Is.EqualTo(true));
+            Assert.That(calculatedResult.NoOfRooms, Is.EqualTo(12));
+            Assert.That(calculatedResult.NoOfWindows, Is.EqualTo(28));
+            Assert.That(calculatedResult.NoOfBathrooms, Is.EqualTo(10));
+            Assert.That(calculatedResult.ParkingSpotsInGarage, Is.EqualTo(12));
         }
 
         [Test]
@@ -54,6 +58,9 @@ namespace HouseF.Tests
             Assert.That(calculatedResult.HasMountainView, Is.EqualTo(false));
             Assert.That(calculatedResult.HasOceanView, Is.EqualTo(false));
             Assert.That(calculatedResult.HasGarage, Is.EqualTo(false));
+            Assert.That(calculatedResult.NoOfRooms, Is.EqualTo(3));
+            Assert.That(calculatedResult.NoOfBathrooms, Is.EqualTo(1));
+            Assert.That(calculatedResult.NoOfRooms, Is.EqualTo(7));
         }
 
         [Test]
@@ -68,6 +75,10 @@ namespace HouseF.Tests
             // Assert
             Assert.IsInstanceOf<HouseWithPool>(calculatedResult);
             Assert.That(calculatedResult.HasSwimmingPool, Is.EqualTo(true));
+            Assert.That(calculatedResult.HasGarage, Is.EqualTo(false));
+            Assert.That(calculatedResult.NoOfRooms, Is.EqualTo(6));
+            Assert.That(calculatedResult.NoOfBathrooms, Is.EqualTo(2));
+            Assert.That(calculatedResult.NoOfWindows, Is.EqualTo(12));
         }
 
         [Test]
@@ -83,6 +94,10 @@ namespace HouseF.Tests
             Assert.IsInstanceOf<HouseWithPoolAndGarage>(calculatedResult);
             Assert.That(calculatedResult.HasSwimmingPool, Is.EqualTo(true));
             Assert.That(calculatedResult.HasGarage, Is.EqualTo(true));
+            Assert.That(calculatedResult.NoOfRooms, Is.EqualTo(4));
+            Assert.That(calculatedResult.NoOfBathrooms, Is.EqualTo(2));
+            Assert.That(calculatedResult.NoOfWindows, Is.EqualTo(9));
+            Assert.That(calculatedResult.ParkingSpotsInGarage, Is.EqualTo(2));
         }
 
         [Test]
@@ -101,6 +116,7 @@ namespace HouseF.Tests
             Assert.That(calculatedResult.NoOfBathrooms, Is.EqualTo(2));
             Assert.That(calculatedResult.NoOfWindows, Is.EqualTo(12));
             Assert.That(calculatedResult.ParkingSpotsInGarage, Is.EqualTo(2));
+            Assert.That(calculatedResult.HasSwimmingPool, Is.EqualTo(false));
         }
 
         //[Test]
