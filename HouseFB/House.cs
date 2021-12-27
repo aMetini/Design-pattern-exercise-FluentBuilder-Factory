@@ -84,7 +84,7 @@ namespace HouseFB
 
             public HouseBuilder SetStreetAddress(string streetAddress)
             {
-                _house.StreetAddress += streetAddress;
+                _house.StreetAddress = streetAddress;
                 return this;
             }
 
@@ -103,7 +103,7 @@ namespace HouseFB
             public House Build()
             {
                 if (_house.NoOfRooms < 0 || _house.NoOfWindows < 0 || _house.ParkingSpotsInGarage < 0)
-                    throw new ArgumentException("Cannot create a house with a negative number of rooms, windows, or parking spots!");
+                    throw new ArgumentException("Cannot create a house with zero or a negative number of rooms, windows, or parking spots!");
                 return _house;
             }
 

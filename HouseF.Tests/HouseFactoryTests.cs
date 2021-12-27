@@ -1,6 +1,7 @@
 using HouseF.Houses;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
@@ -28,147 +29,107 @@ namespace HouseF.Tests
 
             // Assert
             Assert.IsInstanceOf<BelAirDeluxeHouse>(calculatedResult);
+            Assert.That(calculatedResult.HasMarbleFloors, Is.EqualTo(true));
+            Assert.That(calculatedResult.HasTennisCourt, Is.EqualTo(true));
+            Assert.That(calculatedResult.HasSwimmingPool, Is.EqualTo(true));
+            Assert.That(calculatedResult.HasMountainView, Is.EqualTo(true));
+            Assert.That(calculatedResult.HasOceanView, Is.EqualTo(true));
+            Assert.That(calculatedResult.HasGarage, Is.EqualTo(true));
         }
 
-        [TestCase("standardhouse")]
-        public void GetHouseFromDictionary_Get_Return_StandardHouseType(string houseTypeName)
+        [Test]
+        public void CreateHouse_GivenTinyHouse_ReturnsCorrectHouseType()
         {
-            //Arrange
-            MethodInfo method = typeof(HouseFactory)
-                .GetMethod("GetHouseFromDictionary", BindingFlags.NonPublic | BindingFlags.Instance);
-
-            if (method == null) Assert.Fail("Could not find method GetHouseFromDictionary");
-
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("This house is located at 10963 Lindblade Street, Culver City, California 92646.");
-            sb.AppendLine("It has 4 rooms, 2 bathrooms and 12 windows.");
-            sb.AppendLine("It has a garage with space for 2 cars.");
-
-            string expectedOutput = sb.ToString();
-
-            //Act
-            object calculatedObject = method!.Invoke(new HouseFactory(), new object[] { houseTypeName });
-            string calculatedResult = calculatedObject.ToString();
-
-            Assert.That(calculatedResult, Is.EqualTo(expectedOutput));
-        }
-
-        [TestCase("belairdeluxehouse")]
-        public void GetHouseFromDictionary_Get_Return_BelAirDeluxeHouseType(string houseTypeName)
-        {
-            MethodInfo method = typeof(HouseFactory)
-                .GetMethod("GetHouseFromDictionary", BindingFlags.NonPublic | BindingFlags.Instance);
-
-            if (method == null) Assert.Fail("Could not find method GetHouseFromDictionary");
-
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("This house is located at 281 Bentley Circle, Los Angeles, California 90049.");
-            sb.AppendLine("It has 12 rooms, 10 bathrooms and 28 windows.");
-            sb.AppendLine("It is a deluxe house that has both a swimming pool and a garage with space for 12 cars and: ");
-            sb.AppendLine();
-            sb.AppendLine("- a tennis court");
-            sb.AppendLine("- an ocean view");
-            sb.AppendLine("- a mountain view");
-            sb.AppendLine("- marble floors");
-
-            string expectedOutput = sb.ToString();
+            // Arrange
+            string houseTypeName = "tinyhouse";
 
             // Act
-            object calculatedObject = method!.Invoke(new HouseFactory(), new object[] { houseTypeName });
-            string calculatedResult = calculatedObject.ToString();
+            var calculatedResult = _factory.CreateHouse(houseTypeName);
 
             // Assert
-            Assert.That(calculatedResult, Is.EqualTo(expectedOutput));
+            Assert.IsInstanceOf<TinyHouse>(calculatedResult);
+            Assert.That(calculatedResult.HasMarbleFloors, Is.EqualTo(false));
+            Assert.That(calculatedResult.HasTennisCourt, Is.EqualTo(false));
+            Assert.That(calculatedResult.HasSwimmingPool, Is.EqualTo(false));
+            Assert.That(calculatedResult.HasMountainView, Is.EqualTo(false));
+            Assert.That(calculatedResult.HasOceanView, Is.EqualTo(false));
+            Assert.That(calculatedResult.HasGarage, Is.EqualTo(false));
         }
 
-        [TestCase("housewithpool")]
-        public void GetHouseFromDictionary_Get_Return_HouseWithPoolType(string houseTypeName)
+        [Test]
+        public void CreateHouse_GivenHouseWithPool_ReturnCorrectHouseType()
         {
-            //Arrange
-            MethodInfo method = typeof(HouseFactory)
-                .GetMethod("GetHouseFromDictionary", BindingFlags.NonPublic | BindingFlags.Instance);
+            // Arrange
+            string houseTypeName = "housewithpool";
 
-            if (method == null) Assert.Fail("Could not find method GetHouseFromDictionary");
+            // Act
+            var calculatedResult = _factory.CreateHouse(houseTypeName);
 
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("This house is located at 975 Cheyenne Street, Costa Mesa, California 92626.");
-            sb.AppendLine("It has 6 rooms, 2 bathrooms and 12 windows.");
-            sb.AppendLine("It has a nice swimming pool.");
-
-            string expectedOutput = sb.ToString();
-
-            //Act
-            object calculatedObject = method!.Invoke(new HouseFactory(), new object[] { houseTypeName });
-            string calculatedResult = calculatedObject.ToString();
-
-            Assert.That(calculatedResult, Is.EqualTo(expectedOutput));
+            // Assert
+            Assert.IsInstanceOf<HouseWithPool>(calculatedResult);
+            Assert.That(calculatedResult.HasSwimmingPool, Is.EqualTo(true));
         }
 
-        [TestCase("housewithpoolandgarage")]
-        public void GetHouseFromDictionary_Get_Return_HouseWithPoolandGarageType(string houseTypeName)
+        [Test]
+        public void CreateHouse_GivenHouseWithPoolAndGarage_ReturnCorrectHouseType()
         {
-            //Arrange
-            MethodInfo method = typeof(HouseFactory)
-                .GetMethod("GetHouseFromDictionary", BindingFlags.NonPublic | BindingFlags.Instance);
+            // Arrange
+            string houseTypeName = "housewithpoolandgarage";
 
-            if (method == null) Assert.Fail("Could not find method GetHouseFromDictionary");
+            // Act
+            var calculatedResult = _factory.CreateHouse(houseTypeName);
 
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("This house is located at 965 Oasis Dr, Torrance, California 90502.");
-            sb.AppendLine("It has 4 rooms, 2 bathrooms and 9 windows.");
-            sb.AppendLine("It is very fancy and has both a swimming pool, and a garage with space for 2 cars.");
-
-            string expectedOutput = sb.ToString();
-
-            //Act
-            object calculatedObject = method!.Invoke(new HouseFactory(), new object[] { houseTypeName });
-            string calculatedResult = calculatedObject.ToString();
-
-            Assert.That(calculatedResult, Is.EqualTo(expectedOutput));
+            // Assert
+            Assert.IsInstanceOf<HouseWithPoolAndGarage>(calculatedResult);
+            Assert.That(calculatedResult.HasSwimmingPool, Is.EqualTo(true));
+            Assert.That(calculatedResult.HasGarage, Is.EqualTo(true));
         }
 
-        [TestCase("tinyhouse")]
-        public void GetHouseFromDictionary_Get_Return_TinyHouseType(string houseTypeName)
+        [Test]
+        public void CreateHouse_GivenHouseWithGarage_ReturnCorrectHouseType()
         {
-            //Arrange
-            MethodInfo method = typeof(HouseFactory)
-                .GetMethod("GetHouseFromDictionary", BindingFlags.NonPublic | BindingFlags.Instance);
+            // Arrange
+            string houseTypeName = "standardhouse";
 
-            if (method == null) Assert.Fail("Could not find method GetHouseFromDictionary");
+            // Act
+            var calculatedResult = _factory.CreateHouse(houseTypeName);
 
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("This house is located at 100 Miniature Way, Smallville, Kansas 67524.");
-            sb.AppendLine("It has 3 rooms, 1 bathrooms and 7 windows.");
-
-            string expectedOutput = sb.ToString();
-
-            //Act
-            object calculatedObject = method!.Invoke(new HouseFactory(), new object[] { houseTypeName });
-            string calculatedResult = calculatedObject.ToString();
-
-            Assert.That(calculatedResult, Is.EqualTo(expectedOutput));
+            // Assert
+            Assert.IsInstanceOf<StandardHouse>(calculatedResult);
+            Assert.That(calculatedResult.HasGarage, Is.EqualTo(true));
+            Assert.That(calculatedResult.NoOfRooms, Is.EqualTo(4));
+            Assert.That(calculatedResult.NoOfBathrooms, Is.EqualTo(2));
+            Assert.That(calculatedResult.NoOfWindows, Is.EqualTo(12));
+            Assert.That(calculatedResult.ParkingSpotsInGarage, Is.EqualTo(2));
         }
+
+        //[Test]
+        //public void CreateHouse_GivenNonExistentHouseType_ReturnsException()
+        //{
+        //    // Arrange
+        //    string houseTypeName = "nohouse";
+        //    Dictionary<string, Type> test = new Dictionary<string, Type>();
+
+        //    // Act
+        //    var calculatedResult = _factory.CreateHouse(houseTypeName);
+
+        //    // Assert
+        //    //Assert.Throws<KeyNotFoundException>(() => calculatedResult.GetType(GetType());
+        //    Assert.Throws(typeof(KeyNotFoundException), () => houseTypeName
+        //    //Assert.IsInstanceOf<HouseWithPool>(calculatedResult);
+        //}
+
 
         //[Test]
         //public void LoadHouseByReflection_Get_Return_AvailableHouses(Type availableHouseTypes)
         //{
-        //    //Arrange
-        //    MethodInfo method = typeof(HouseFactory)
-        //        .GetMethod("GetHouseFromDictionary", BindingFlags.NonPublic | BindingFlags.Instance);
+        //  Arrange
+        //    
 
-        //    if (method == null) Assert.Fail("Could not find method GetHouseFromDictionary");
+        //  Act
+        //    
 
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.AppendLine("This house is located at 10963 Lindblade Street, Culver City, California 92646.");
-        //    sb.AppendLine("It has 4 rooms, 2 bathrooms and 12 windows.");
-        //    sb.AppendLine("It has a garage with space for 2 cars.");
-
-        //    string expectedOutput = sb.ToString();
-
-        //    //Act
-        //    object calculatedObject = method!.Invoke(new HouseFactory(), new object[] { houseTypeName });
-        //    string calculatedResult = calculatedObject.ToString();
-
+        //  Assert
         //    Assert.That(calculatedResult, Is.EqualTo(expectedOutput));
         //}
 

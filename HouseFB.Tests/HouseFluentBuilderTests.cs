@@ -26,6 +26,22 @@ namespace HouseFB.Tests
             Assert.AreEqual(false, houseFB.HasSwimmingPool);
         }
 
+        [TestCase(2)]
+        public void HouseWithGarage_Get_ReturnTrue(int noOfParkingSpots)
+        {
+            House houseFB = new HouseBuilder().SetNoOfParkingSpotsInGarage(noOfParkingSpots).Build();
+            Assert.AreEqual(2, houseFB.ParkingSpotsInGarage);
+            Assert.AreEqual(true, houseFB.HasGarage);
+        }
+
+        [TestCase(0)]
+        public void HouseWithoutGarage_Get_ReturnTrue(int noOfParkingSpots)
+        {
+            House houseFB = new HouseBuilder().SetNoOfParkingSpotsInGarage(noOfParkingSpots).Build();
+            Assert.AreEqual(0, houseFB.ParkingSpotsInGarage);
+            Assert.AreEqual(false, houseFB.HasGarage);
+        }
+
         [TestCase(3)]
         public void NoOfRooms_Get_Return3Rooms(int noOfRooms)
         {
@@ -59,7 +75,31 @@ namespace HouseFB.Tests
         {
             Assert.That(() => new HouseBuilder().AddNoOfRooms(noOfRooms).Build(),
                 Throws.TypeOf<ArgumentException>()
-                .With.Message.EqualTo("Cannot create a house with a negative number of rooms, windows, or parking spots!"));
+                .With.Message.EqualTo("Cannot create a house with zero or a negative number of rooms, windows, or parking spots!"));
         }
+
+        [TestCase(-2)]
+        public void NoOfWindows_IsNegativeNo_Get_ReturnArgException(int noOfWindows)
+        {
+            Assert.That(() => new HouseBuilder().AddNoOfRooms(noOfWindows).Build(),
+                Throws.TypeOf<ArgumentException>()
+                .With.Message.EqualTo("Cannot create a house with zero or a negative number of rooms, windows, or parking spots!"));
+        }
+
+        [TestCase(-2)]
+        public void NoOfParkingSpots_IsNegativeNo_Get_ReturnArgException(int noOfParkingSpots)
+        {
+            Assert.That(() => new HouseBuilder().AddNoOfRooms(noOfParkingSpots).Build(),
+                Throws.TypeOf<ArgumentException>()
+                .With.Message.EqualTo("Cannot create a house with zero or a negative number of rooms, windows, or parking spots!"));
+        }
+
+        //[TestCase(0)]
+        //public void NoOfParkingSpots_IsZero_Get_ReturnArgException(int noOfParkingSpots)
+        //{
+        //    Assert.That(() => new HouseBuilder().AddNoOfRooms(noOfParkingSpots).Build(),
+        //        Throws.TypeOf<ArgumentException>()
+        //        .With.Message.EqualTo("Cannot create a house with zero or a negative number of rooms, windows, or parking spots!"));
+        //}
     }
 }

@@ -40,11 +40,14 @@ namespace HouseF
         private House GetHouseFromDictionary(string houseTypeName)
         {
             Type type = _houses[houseTypeName];
-            if (type == null)
+            if (type != null && _houses.ContainsKey(houseTypeName))
             {
-                throw new ArgumentException($"Unable to find house type with name {houseTypeName}");
+                return (House)Activator.CreateInstance(type);
             }
-            return (House)Activator.CreateInstance(type);
+            else
+            {
+                throw new KeyNotFoundException(houseTypeName);
+            }
         }
 
     }
