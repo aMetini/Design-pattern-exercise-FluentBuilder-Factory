@@ -27,7 +27,7 @@ namespace HouseFB.Tests
         }
 
         [TestCase(2)]
-        public void HouseWithGarage_Get_ReturnTrue(int noOfParkingSpots)
+        public void HouseWithGarageAndParkingSpots_Get_ReturnTrueAndNoParkingSpots(int noOfParkingSpots)
         {
             House houseFB = new HouseBuilder().SetNoOfParkingSpotsInGarage(noOfParkingSpots).Build();
             Assert.AreEqual(2, houseFB.ParkingSpotsInGarage);
@@ -35,7 +35,7 @@ namespace HouseFB.Tests
         }
 
         [TestCase(0)]
-        public void HouseWithoutGarage_Get_ReturnTrue(int noOfParkingSpots)
+        public void HouseWithoutGarageAndZeroParking_Get_ReturnTrueAndZeroParking(int noOfParkingSpots)
         {
             House houseFB = new HouseBuilder().SetNoOfParkingSpotsInGarage(noOfParkingSpots).Build();
             Assert.AreEqual(0, houseFB.ParkingSpotsInGarage);
@@ -71,7 +71,7 @@ namespace HouseFB.Tests
         }
 
         [TestCase(-3)]
-        public void NoOfRooms_Negative_Get_ReturnArgException(int noOfRooms)
+        public void NoOfRooms_IsNegative_Get_ReturnArgException(int noOfRooms)
         {
             Assert.That(() => new HouseBuilder().AddNoOfRooms(noOfRooms).Build(),
                 Throws.TypeOf<ArgumentException>()
