@@ -27,19 +27,25 @@ namespace HouseFB.Tests
         }
 
         [TestCase(2)]
-        public void HouseWithGarageAndParkingSpots_Get_ReturnTrueAndNoParkingSpots(int noOfParkingSpots)
+        public void HouseWithGarageAndParkingSpots_Get_ReturnTrueAndNumParkingSpots(int noOfParkingSpots)
         {
             House houseFB = new HouseBuilder().SetNoOfParkingSpotsInGarage(noOfParkingSpots).Build();
+            bool calculatedResult = houseFB.HasGarage;
+
+            Assert.IsTrue(calculatedResult);
             Assert.AreEqual(2, houseFB.ParkingSpotsInGarage);
-            Assert.AreEqual(true, houseFB.HasGarage);
+            //Assert.AreEqual(true, houseFB.HasGarage);
         }
 
         [TestCase(0)]
         public void HouseWithoutGarageAndZeroParking_Get_ReturnTrueAndZeroParking(int noOfParkingSpots)
         {
             House houseFB = new HouseBuilder().SetNoOfParkingSpotsInGarage(noOfParkingSpots).Build();
+            bool calculatedResult = houseFB.HasGarage;
+
+            Assert.IsFalse(calculatedResult);
             Assert.AreEqual(0, houseFB.ParkingSpotsInGarage);
-            Assert.AreEqual(false, houseFB.HasGarage);
+            //Assert.AreEqual(false, houseFB.HasGarage);
         }
 
         [TestCase(3)]

@@ -119,21 +119,17 @@ namespace HouseF.Tests
             Assert.That(calculatedResult.HasSwimmingPool, Is.EqualTo(false));
         }
 
-        //[Test]
-        //public void CreateHouse_GivenNonExistentHouseType_ReturnsException()
-        //{
-        //    // Arrange
-        //    string houseTypeName = "nohouse";
-        //    Dictionary<string, Type> test = new Dictionary<string, Type>();
+        [Test]
+        public void CreateHouse_GivenNonExistentHouseType_ReturnsException()
+        {
+            // Arrange
+            string houseTypeName = "nohouse";
 
-        //    // Act
-        //    var calculatedResult = _factory.CreateHouse(houseTypeName);
+            // Act
 
-        //    // Assert
-        //    //Assert.Throws<KeyNotFoundException>(() => calculatedResult.GetType(GetType());
-        //    Assert.Throws(typeof(KeyNotFoundException), () => houseTypeName
-        //    //Assert.IsInstanceOf<HouseWithPool>(calculatedResult);
-        //}
+            // Assert
+            Assert.Throws<KeyNotFoundException>(() => _factory.CreateHouse(houseTypeName));
+        }
 
 
         //[Test]
